@@ -1,0 +1,12 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: astronomy-rag
+
+langchain4j:
+  lmstudio:
+    base-url: http://localhost:1234/v1
+    chat-model: qwen2.5-7b-instruct-1m
+    chat-timeout: 120

@@ -1,0 +1,51 @@
+# Dependencies
+frontend/node_modules/
+
+# Build output
+backend/target/
+frontend/dist/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Model files (too large for GitHub, download separately)
+data-pipeline/models/
+*.bin
+*.onnx
+*.onnx_data
+*.pt
+*.mdl
+*.msc
+*.mv
+
+# ChromaDB data
+chroma_data/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+.env.local
+
+# Logs
+*.log
+
+# Claude local settings
+.claude/settings.local.json
+
+# Test artifacts
+detail_chart.png
+test_chart.png
+
+# Large data files
+data-pipeline/database_files/
+*.csv

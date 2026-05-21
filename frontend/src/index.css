@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #334155 #0f172a;
+  }
+
+  body {
+    @apply bg-gray-950 text-gray-100;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  }
+}
+
+@layer components {
+  .message-bubble-user {
+    @apply bg-indigo-600 text-white rounded-2xl rounded-br-md px-4 py-3 max-w-[80%] self-end;
+  }
+
+  .message-bubble-assistant {
+    @apply bg-gray-800 text-gray-100 rounded-2xl rounded-bl-md px-4 py-3 max-w-[85%] self-start border border-gray-700;
+  }
+}
+
+/* Streaming cursor animation */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.streaming-cursor::after {
+  content: '|';
+  animation: blink 1s step-end infinite;
+  @apply text-indigo-400;
+}

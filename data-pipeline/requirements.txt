@@ -1,0 +1,7 @@
+chromadb>=0.5.0
+requests>=2.31.0
+sentence-transformers>=3.0.0
+flask>=3.0.0
+modelscope>=1.20.0
+numpy>=1.26.0
+matplotlib>=3.8.0
