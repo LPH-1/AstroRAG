@@ -45,7 +45,20 @@ Thumbs.db
 # Test artifacts
 detail_chart.png
 test_chart.png
+test_*.png
+test_*.json
 
 # Large data files
 data-pipeline/database_files/
 *.csv
+
+# Build logs
+build-log-*.txt
+
+# Node (root-level accidents)
+node_modules/
+package.json
+package-lock.json
+
+# Star chart images
+starchart_*.png

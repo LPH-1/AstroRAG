@@ -2,36 +2,156 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ================================================================
+   Highlight.js theme — GitHub Dark (customized for space theme)
+   ================================================================ */
+@layer base {
+  .hljs { color: #c9d1d9; background: #161b22; }
+  .hljs-keyword { color: #ff7b72; }
+  .hljs-string { color: #a5d6ff; }
+  .hljs-number { color: #79c0ff; }
+  .hljs-title { color: #d2a8ff; font-weight: bold; }
+  .hljs-title.class_ { color: #ffa657; }
+  .hljs-title.function_ { color: #d2a8ff; }
+  .hljs-type { color: #ffa657; }
+  .hljs-literal { color: #79c0ff; }
+  .hljs-built_in { color: #ffa657; }
+  .hljs-meta { color: #8b949e; }
+  .hljs-comment { color: #8b949e; font-style: italic; }
+  .hljs-attr { color: #79c0ff; }
+  .hljs-variable { color: #ffa657; }
+  .hljs-params { color: #c9d1d9; }
+  .hljs-selector-tag { color: #7ee787; }
+  .hljs-selector-id { color: #d2a8ff; }
+  .hljs-selector-class { color: #ffa657; }
+  .hljs-selector-attr { color: #79c0ff; }
+  .hljs-selector-pseudo { color: #d2a8ff; }
+  .hljs-template-tag { color: #ff7b72; }
+  .hljs-template-variable { color: #ffa657; }
+  .hljs-addition { color: #7ee787; }
+  .hljs-deletion { color: #ff7b72; }
+  .hljs-symbol { color: #79c0ff; }
+  .hljs-regexp { color: #a5d6ff; }
+}
+
 @layer base {
   * {
     scrollbar-width: thin;
-    scrollbar-color: #334155 #0f172a;
+    scrollbar-color: #334155 transparent;
+  }
+
+  *::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background: #334155;
+    border-radius: 3px;
+  }
+
+  *::-webkit-scrollbar-thumb:hover {
+    background: #475569;
   }
 
   body {
-    @apply bg-gray-950 text-gray-100;
+    @apply bg-gray-950 text-gray-100 antialiased;
     font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  }
+
+  ::selection {
+    @apply bg-indigo-500/40 text-white;
   }
 }
 
+/* ================================================================
+   Components
+   ================================================================ */
 @layer components {
   .message-bubble-user {
-    @apply bg-indigo-600 text-white rounded-2xl rounded-br-md px-4 py-3 max-w-[80%] self-end;
+    @apply bg-indigo-600 text-white rounded-2xl rounded-br-md px-4 py-3 max-w-[80%] self-end shadow-lg shadow-indigo-500/10;
+    animation: messageIn 0.25s ease-out;
   }
 
   .message-bubble-assistant {
-    @apply bg-gray-800 text-gray-100 rounded-2xl rounded-bl-md px-4 py-3 max-w-[85%] self-start border border-gray-700;
+    @apply bg-gray-800/80 text-gray-100 rounded-2xl rounded-bl-md px-4 py-3 max-w-[85%] self-start border border-gray-700/50 shadow-lg shadow-gray-900/10;
+    animation: messageIn 0.3s ease-out;
+  }
+
+  .scrollbar-none {
+    scrollbar-width: none;
+  }
+
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
   }
 }
 
-/* Streaming cursor animation */
+/* ================================================================
+   Animations
+   ================================================================ */
+@keyframes messageIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
 @keyframes blink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.4); }
+  50% { box-shadow: 0 0 12px 4px rgba(99, 102, 241, 0.15); }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.2s ease-out;
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.3s ease-out;
 }
 
 .streaming-cursor::after {
   content: '|';
   animation: blink 1s step-end infinite;
   @apply text-indigo-400;
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent 0%, rgba(99, 102, 241, 0.06) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
 }

@@ -557,18 +557,18 @@ def dso_marker(dso_type):
 
 def resolve_chart_style(style_name):
     atlas = {
-        "background_top": "#05070c",
-        "background_bottom": "#05070c",
-        "vignette_alpha": 0.22,
-        "grid_alpha": 0.45,
+        "background_top": "#0d1525",
+        "background_bottom": "#060912",
+        "vignette_alpha": 0.30,
+        "grid_alpha": 0.50,
         "show_grid": True,
-        "star_alpha_floor": 0.28,
-        "bright_star_glow": 3.8,
-        "constellation_line": "#6e86aa",
-        "constellation_line_alpha": 0.38,
-        "constellation_fill": "#4a7dff",
+        "star_alpha_floor": 0.32,
+        "bright_star_glow": 4.5,
+        "constellation_line": "#7d9bc0",
+        "constellation_line_alpha": 0.42,
+        "constellation_fill": "#557fd4",
         "constellation_fill_alpha": 0.0,
-        "label_color": "#e4e9f1",
+        "label_color": "#dce6f5",
         "show_mobile_chrome": False,
         "show_planets": False,
         "texture_stars": 0,
@@ -578,21 +578,21 @@ def resolve_chart_style(style_name):
 
     mobile = atlas.copy()
     mobile.update({
-        "background_top": "#2b3d58",
-        "background_bottom": "#07101f",
-        "vignette_alpha": 0.46,
+        "background_top": "#1a2a44",
+        "background_bottom": "#0a0f1a",
+        "vignette_alpha": 0.52,
         "grid_alpha": 0.0,
         "show_grid": False,
-        "star_alpha_floor": 0.38,
-        "bright_star_glow": 6.2,
-        "constellation_line": "#9ebdff",
-        "constellation_line_alpha": 0.72,
-        "constellation_fill": "#4775ff",
-        "constellation_fill_alpha": 0.24,
-        "label_color": "#d9e5ff",
+        "star_alpha_floor": 0.42,
+        "bright_star_glow": 7.0,
+        "constellation_line": "#b8d0ff",
+        "constellation_line_alpha": 0.78,
+        "constellation_fill": "#5885ff",
+        "constellation_fill_alpha": 0.28,
+        "label_color": "#e8efff",
         "show_mobile_chrome": True,
         "show_planets": True,
-        "texture_stars": 650,
+        "texture_stars": 800,
     })
     return mobile
 
@@ -673,14 +673,15 @@ def draw_texture_stars(ax, x_limit, y_min, y_max, count):
 
 
 def draw_mobile_chrome(ax):
-    ax.text(0.88, 0.985, "6:15 AM", transform=ax.transAxes, color="#f4f7ff",
-            fontsize=8, ha="center", va="top", zorder=80)
+    ax.text(0.88, 0.985, "STAR ATLAS", transform=ax.transAxes, color="#c8d8f0",
+            fontsize=7, ha="center", va="top", zorder=80, fontweight="bold",
+            fontfamily="monospace")
     controls = [("H", 0.70), ("Z", 0.80), ("M", 0.90)]
     for label, x in controls:
-        ax.text(x, 0.055, label, transform=ax.transAxes, color="#ffffff",
+        ax.text(x, 0.048, label, transform=ax.transAxes, color="#e8f0ff",
                 fontsize=9, ha="center", va="center", zorder=82,
-                bbox=dict(boxstyle="circle,pad=0.22", fc="#1b2738",
-                          ec="#ffffff", lw=0.9, alpha=0.88))
+                bbox=dict(boxstyle="circle,pad=0.22", fc="#142238",
+                          ec="#5a7aaa", lw=1.0, alpha=0.92))
 
 
 # ---------------------------------------------------------------------------
@@ -692,7 +693,7 @@ def render_chart(ra0, dec0, fov, width, height, mag_limit, show_dso=True, style_
     import matplotlib.pyplot as plt
     from matplotlib.patches import Ellipse
 
-    dpi = 100
+    dpi = 150
     fig_w = width / dpi
     fig_h = height / dpi
     style = resolve_chart_style(style_name)
@@ -716,8 +717,8 @@ def render_chart(ra0, dec0, fov, width, height, mag_limit, show_dso=True, style_
 
     # Coordinate grid, with RA/Dec labels around the plotting frame.
     step = grid_step(fov)
-    grid_color = "#24364e"
-    label_color = "#8da3bd"
+    grid_color = "#2a3f5a"
+    label_color = "#99b0cc"
     if style["show_grid"]:
         for dec_line in iter_grid_values(dec0, fov, step):
             if dec_line < -89 or dec_line > 89:
