@@ -9,15 +9,15 @@ echo ================================================
 echo.
 
 echo [1/6] Starting ChromaDB (port 8000) ...
-start "ChromaDB" cmd /k "chcp 65001 >nul && title ChromaDB && chroma run --path C:\Users\34128\Projects\astronomy-rag\chroma_data"
+start "ChromaDB" cmd /k "chcp 65001 >nul && title ChromaDB && chroma run --path %~dp0chroma_data"
 echo        OK
 
 echo [2/6] Starting Embedding Server (port 8081) ...
-start "Embedding" cmd /k "chcp 65001 >nul && title Embedding && cd /d C:\Users\34128\Projects\astronomy-rag\data-pipeline && python embedding_server.py"
+start "Embedding" cmd /k "chcp 65001 >nul && title Embedding && cd /d %~dp0data-pipeline && python embedding_server.py"
 echo        OK
 
 echo [3/6] Starting Star Chart Server (port 8082) ...
-start "StarChart" cmd /k "chcp 65001 >nul && title StarChart && cd /d C:\Users\34128\Projects\astronomy-rag\data-pipeline && python starchart_server.py"
+start "StarChart" cmd /k "chcp 65001 >nul && title StarChart && cd /d %~dp0data-pipeline && python starchart_server.py"
 echo        OK
 
 echo [4/6] Checking LM Studio (port 1234) ...
@@ -25,21 +25,21 @@ powershell -Command "try{$r=Invoke-RestMethod 'http://localhost:1234/v1/models' 
 echo.
 
 echo [5/6] Starting Spring Boot (port 8080) ...
-if exist "C:\Users\34128\Projects\astronomy-rag\backend\mvnw.cmd" (
-    start "SpringBoot" cmd /k "chcp 65001 >nul && title SpringBoot && cd /d C:\Users\34128\Projects\astronomy-rag\backend && mvnw.cmd spring-boot:run"
+if exist "%~dp0backend\mvnw.cmd" (
+    start "SpringBoot" cmd /k "chcp 65001 >nul && title SpringBoot && cd /d %~dp0backend && mvnw.cmd spring-boot:run"
 ) else (
-    start "SpringBoot" cmd /k "chcp 65001 >nul && title SpringBoot && cd /d C:\Users\34128\Projects\astronomy-rag\backend && mvn spring-boot:run"
+    start "SpringBoot" cmd /k "chcp 65001 >nul && title SpringBoot && cd /d %~dp0backend && mvn spring-boot:run"
 )
 echo        OK (first build may take a few minutes)
 
 echo [6/6] Starting React Frontend (port 3000) ...
-if not exist "C:\Users\34128\Projects\astronomy-rag\frontend\node_modules" (
+if not exist "%~dp0frontend\node_modules" (
     echo        First run: installing npm packages ...
-    cd /d "C:\Users\34128\Projects\astronomy-rag\frontend"
+    cd /d "%~dp0frontend"
     call npm install
-    cd /d "C:\Users\34128\Projects\astronomy-rag"
+    cd /d "%~dp0"
 )
-start "React" cmd /k "chcp 65001 >nul && title React && cd /d C:\Users\34128\Projects\astronomy-rag\frontend && npm run dev"
+start "React" cmd /k "chcp 65001 >nul && title React && cd /d %~dp0frontend && npm run dev"
 echo        OK
 
 echo.

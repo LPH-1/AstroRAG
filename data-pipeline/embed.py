@@ -13,6 +13,7 @@ import sys
 import time
 
 import requests
+from model_utils import find_or_download_model
 
 CHROMA_BASE = os.environ.get("CHROMA_BASE", "http://localhost:8000")
 CHROMA_API = f"{CHROMA_BASE}/api/v2/tenants/default_tenant/databases/default_database"
@@ -23,32 +24,9 @@ MODELS_DIR = os.path.join(SCRIPT_DIR, "models")
 DATA_FILE = os.path.join(SCRIPT_DIR, "astronomy_data.json")
 
 
-def find_or_download_model():
-    """查找或下载 bge-m3 模型"""
-    for root, dirs, files in os.walk(MODELS_DIR):
-        if "config.json" in files and "tokenizer.json" in files:
-            print(f"找到本地模型: {root}")
-            return root
-
-    print(f"本地未找到模型 {MODEL_ID}，从 ModelScope 下载...")
-    print("(约 2GB，仅首次需要)")
-    try:
-        from modelscope import snapshot_download
-    except ImportError:
-        print("错误: 请先安装 modelscope")
-        print("  pip install modelscope")
-        print("或手动下载: python download_model.py")
-        sys.exit(1)
-
-    os.makedirs(MODELS_DIR, exist_ok=True)
-    model_dir = snapshot_download(MODEL_ID, cache_dir=MODELS_DIR)
-    print(f"下载完成: {model_dir}")
-    return model_dir
-
-
 def load_embedding_model():
     """加载本地 bge-m3 模型"""
-    model_path = find_or_download_model()
+    model_path = find_or_download_model(MODELS_DIR)
     print(f"正在加载模型: {model_path} ...")
     from sentence_transformers import SentenceTransformer
     model = SentenceTransformer(model_path)

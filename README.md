@@ -46,7 +46,7 @@
 ### 一键启动（Windows）
 
 ```batch
-# 1. 启动 LM Studio，加载 qwen2.5-7b-instruct 模型，开启 local server (port 1234)
+# 1. 启动 LM Studio，加载 Qwen2.5-7B-Instruct 模型，开启 local server (port 1234)
 
 # 2. 运行启动脚本
 .\start.ps1
@@ -147,7 +147,7 @@ GET /v1/starchart?ra=83.82&dec=-5.39&fov=18&width=1800&height=2200&mag_limit=8&s
 
 - **前端**: React 18, TypeScript, Tailwind CSS, Vite, react-markdown, rehype-highlight
 - **后端**: Spring Boot 3.3, LangChain4j 0.35, Java 17
-- **AI**: LM Studio (Qwen2.5-7B), BGE-M3 Embedding, ChromaDB
+- **AI**: LM Studio (Qwen2.5-7B-Instruct), BGE-M3 Embedding, ChromaDB
 - **星图**: Flask, Matplotlib, NumPy, HYG v3.8 星表, OpenNGC 目录
 - **数据源**: 梅西耶天体表, NGC/IC 星表, 星座数据, 天文术语库
 

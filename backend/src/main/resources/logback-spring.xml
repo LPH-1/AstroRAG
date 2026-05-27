@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
+
+    <!-- AstroRAG 日志级别 -->
+    <logger name="com.astrorag" level="INFO"/>
+
+    <!-- LangChain4j 详细信息按需开启 -->
+    <logger name="dev.langchain4j" level="WARN"/>
+
+    <!-- 根级别 -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+</configuration>

@@ -5,8 +5,16 @@ spring:
   application:
     name: astronomy-rag
 
+# LLM 推理服务 (LM Studio / OpenAI-compatible API)
 langchain4j:
   lmstudio:
     base-url: http://localhost:1234/v1
     chat-model: qwen2.5-7b-instruct-1m
     chat-timeout: 120
+
+# 外部服务地址
+astrorag:
+  embedding:
+    base-url: http://localhost:8081
+  chromadb:
+    base-url: http://localhost:8000

@@ -1,0 +1,36 @@
+# Auto-detect text files, ensure LF line endings
+* text=auto
+
+# Java / Spring Boot
+*.java text diff=java
+*.xml text
+*.yml text
+*.properties text
+
+# Python
+*.py text diff=python
+*.txt text
+
+# Frontend
+*.ts text diff=typescript
+*.tsx text diff=typescript
+*.js text
+*.json text
+*.css text
+
+# Shell scripts must be LF
+*.sh text eol=lf
+*.ps1 text eol=lf
+
+# Windows batch files must be CRLF
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Binary
+*.jar binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.bin binary
+*.pickle binary

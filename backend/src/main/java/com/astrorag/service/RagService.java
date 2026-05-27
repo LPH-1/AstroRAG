@@ -9,6 +9,7 @@ import dev.langchain4j.data.message.UserMessage;
 import dev.langchain4j.model.StreamingResponseHandler;
 import dev.langchain4j.model.openai.OpenAiStreamingChatModel;
 import dev.langchain4j.model.output.Response;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
@@ -48,8 +49,9 @@ public class RagService {
 
     public RagService(RestClient.Builder restClientBuilder,
                       OpenAiStreamingChatModel streamingChatModel,
-                      ChatSessionService sessionService) {
-        this.restClient = restClientBuilder.baseUrl("http://localhost:8081").build();
+                      ChatSessionService sessionService,
+                      @Value("${astrorag.embedding.base-url}") String embeddingBaseUrl) {
+        this.restClient = restClientBuilder.baseUrl(embeddingBaseUrl).build();
         this.streamingChatModel = streamingChatModel;
         this.sessionService = sessionService;
     }

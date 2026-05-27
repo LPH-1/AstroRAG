@@ -13,6 +13,7 @@ import sys
 
 import requests
 from flask import Flask, request, jsonify
+from model_utils import find_or_download_model
 
 MODEL_ID = "BAAI/bge-m3"
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -24,28 +25,6 @@ COLLECTION_NAME = "astronomy_knowledge"
 app = Flask(__name__)
 model = None
 collection_id = None
-
-
-def find_or_download_model():
-    for root, dirs, files in os.walk(MODELS_DIR):
-        if "config.json" in files and "tokenizer.json" in files:
-            print(f"找到本地模型: {root}")
-            return root
-
-    print(f"本地未找到模型 {MODEL_ID}，从 ModelScope 下载...")
-    print("(约 2GB，仅首次需要)")
-    try:
-        from modelscope import snapshot_download
-    except ImportError:
-        print("错误: 请先安装 modelscope")
-        print("  pip install modelscope")
-        print("或手动下载: python download_model.py")
-        sys.exit(1)
-
-    os.makedirs(MODELS_DIR, exist_ok=True)
-    model_dir = snapshot_download(MODEL_ID, cache_dir=MODELS_DIR)
-    print(f"下载完成: {model_dir}")
-    return model_dir
 
 
 def ensure_chroma_collection():
@@ -80,7 +59,7 @@ print("=" * 50)
 print("AstroRAG Embedding + 检索服务器")
 print("=" * 50)
 
-model_path = find_or_download_model()
+model_path = find_or_download_model(MODELS_DIR)
 print(f"正在加载 embedding 模型...")
 from sentence_transformers import SentenceTransformer
 model = SentenceTransformer(model_path)

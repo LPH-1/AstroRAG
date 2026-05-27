@@ -173,7 +173,7 @@ function App() {
       </main>
 
       <footer className="px-6 py-2 text-center text-[10px] text-gray-700 border-t border-gray-800/40 relative z-10">
-        Powered by Ollama + Qwen2.5-7B · 本地运行 · 梅西耶 / NGC/IC / 星座与天文术语
+        Powered by LM Studio 本地推理 · BGE-M3 + ChromaDB · 梅西耶 / NGC/IC / 星座与天文术语
       </footer>
     </div>
   );

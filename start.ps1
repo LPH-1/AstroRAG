@@ -10,7 +10,7 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
-$projectRoot = "C:\Users\34128\Projects\astronomy-rag"
+$projectRoot = $PSScriptRoot
 
 function Start-ServiceWindow {
     param(
