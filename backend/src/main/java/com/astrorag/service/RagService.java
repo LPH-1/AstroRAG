@@ -1,6 +1,5 @@
 package com.astrorag.service;
 
-import com.astrorag.model.SearchResult;
 import com.astrorag.model.SourceReference;
 import dev.langchain4j.data.message.AiMessage;
 import dev.langchain4j.data.message.ChatMessage;
